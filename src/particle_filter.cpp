@@ -22,7 +22,7 @@ using namespace std;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	// Set the number of particles. Initialize all particles to first position (based on estimates of 
-	//   x, y, theta and their uncertainties from GPS) and all weights to 1. 
+	//   x, y, theta and their uncertainties from GPS) and all weights to 1. Add random Gaussian noise to each particle.
     
     num_particles = 100;
     

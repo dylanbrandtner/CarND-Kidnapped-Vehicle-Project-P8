@@ -1,9 +1,9 @@
 # Particle Filter: Kidnapped Vehicle Project
 
 [//]: # (Image References)
-[image1]: ./intro.png  "intro"
-[image2]: ./Filter_algo.png  "algo"
-[image3]: ./result.png  "result"
+[image1]: ./doc/intro.png  "intro"
+[image2]: ./doc/Filter_algo.png  "algo"
+[image3]: ./doc/result.png  "result"
 
 ## Project Introduction
 A robot has been kidnapped and transported to a new location! Luckily it has a map of this location, a (noisy) GPS estimate of its initial location, and lots of (noisy) sensor and control data. 
