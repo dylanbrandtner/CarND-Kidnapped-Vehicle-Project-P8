@@ -45,6 +45,8 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
         
         particles.push_back(p);
     }
+    
+    is_initialized = true;
 
 }
 
@@ -186,8 +188,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
         }
                 
-        SetAssociations(particles[i],associations, sense_x, sense_y);
-        break;
+        SetAssociations(particles[i],associations, sense_x, sense_y);        
     }
 }
 
