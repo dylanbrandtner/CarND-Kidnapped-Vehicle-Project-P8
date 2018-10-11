@@ -12,7 +12,7 @@ In this project, I implemented a 2 dimensional particle filter in C++. The parti
 
 ![alt text][image1]
 
-The localization is visualized in the simulator as a blue circle.  The green lines indicate sensor measurements to the various landmarks, and the blue lines indicate the observations from the best predicted particle in the filter. 
+The calculated location from the particle filter is visualized in the simulator as a blue circle.  The green lines indicate sensor measurements to the various landmarks, and the blue lines indicate the observations from the best predicted particle in the filter. Thus, when the green and blue lines overlap, the filter is localizing the vehicle with high accuracy.  
 
 ## [Rubric Points](https://review.udacity.com/#!/rubrics/747/view)
 
@@ -37,9 +37,9 @@ Yes, the run completes in about 50 seconds.
 Yes, the localization is visualized in the simulator as a blue circle.  If you view the [recording of my final result](./project_recording.mp4), you can see the filter localizes the vehicle well throughout the run.  A description of the filter implementation itself can be found below. 
 
 ## Running the Code
-This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
+This project uses the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
-The main program can be built and run by doing the following from the project top directory.
+The main program can be built and run by doing the following from the project's top level directory.
 
 1. mkdir build && cd build
 2. cmake .. && make
@@ -55,23 +55,23 @@ The sections below will go through each of the 4 steps in the algorithm, which c
 
 ### Initialization 
 
-In the initialization step (see the "init()" function), the "ParticleFilter" class takes in the initial GPS measurements, and sets the initial states of all particles to those values +/- some Gaussian noise using the provided standard deviation and the "normal_distribution" class from the C++ standard library.  I chose to use 100 particles as this gave me good accuracy with reasonable performance.  
+In the initialization step (see the `init()` function), the `ParticleFilter` class takes in the initial GPS measurements, and sets the initial states of all particles to those values +/- some Gaussian noise using the provided standard deviation and the `normal_distribution` class from the C++ standard library.  I chose to use 100 particles as this gave me good accuracy with reasonable performance.  
 
 ### Prediction Step 
 
-In the prediction step (see the "prediction()" function), the "ParticleFilter" class takes in the velocity and yaw rate of the vehicle, and uses this to predict the new x, y, and theta values using trigonometry and our "bicycle" motion model.  It again adds some Gaussian noise to the measurements using the provided standard deviation and the "normal_distribution" class.
+In the prediction step (see the `prediction()` function), the `ParticleFilter` class takes in the velocity and yaw rate of the vehicle, and uses this to predict new x, y, and theta values for each particle using trigonometry and our "bicycle" motion model.  It again adds some random Gaussian noise to the measurements using the provided standard deviation and the `normal_distribution` class.
 
 ### Update Step 
 
-The update step (see the "updateWeights() function) is by far the most complex step in the process.  For each particle, the algorithm preforms the following:
-1. Gather a list of predicted measurements by filtering the list of all landmark objects to only include those within the provide sensor range.
-2. Transform the input set of observations from the car from the Vehicle's coordinate system into the Map's coordinate system.  
-3. Associate each of the observations with a predicted measurement using the nearest neighbor algorithm
-4. Calculate the new weight of the particle to be the product of each observations [Multivariate-Gaussian probability density](https://en.wikipedia.org/wiki/Multivariate_normal_distribution).
+The update step (see the `updateWeights()` function) is by far the most complex step in the process.  For each particle, the algorithm preforms the following:
+1. Gathers a list of predicted measurements by filtering the list of all landmark objects to only include those within the provided sensor range.
+2. Transforms the input set of observations from the Vehicle's coordinate system into the Map's coordinate system.  
+3. Associates each of the observations with a predicted measurement using the nearest neighbor algorithm
+4. Calculates the weight of the particle as the product of each observations [Multivariate-Gaussian probability density](https://en.wikipedia.org/wiki/Multivariate_normal_distribution).
 
 ### Resample 
 
-The resampling step can be found in the "resample()" function of the "ParticleFilter" class.  In the course materials on the resample step, the instructor used a "resampling wheel" to generate the new set of particles from the assigned weights.  However, as was suggested in the provided source code, the C++ standard library has a "discrete_distribution" class that simplifies this operation.  Thus, all I needed to do was extract the weights of each particle into a separate vector, and pass that vector into a "discrete_distribution" class, which I then use to select indexes in the previous list of particles.
+The resampling step can be found in the `resample()` function of the `ParticleFilter` class.  In the course materials on the resample step, the instructor used a "resampling wheel" to generate the new set of particles from the assigned weights.  However, as was suggested in the provided source code, the C++ standard library has a `discrete_distribution` class that simplifies this operation.  Thus, all I needed to do was extract the weights of each particle into a separate vector, and pass that vector into a `discrete_distribution` class, which I then use to select indexes from the previous list of particles.
 
 ## Results
 
