@@ -12,6 +12,8 @@ In this project, I implemented a 2 dimensional particle filter in C++. The parti
 
 ![alt text][image1]
 
+The localization is visualized in the simulator as a blue circle.  The green lines indicate sensor measurements to the various landmarks, and the blue lines indicate the observations from the best predicted particle in the filter. 
+
 ## [Rubric Points](https://review.udacity.com/#!/rubrics/747/view)
 
 Here I will consider the rubric points individually.  
@@ -32,7 +34,7 @@ Yes, the run completes in about 50 seconds.
 
 ### General: Does your code use a particle filter to localize the robot?
 
-Yes, the localization is visualized in the simulator as a blue circle.  The green lines indicate sensor measurements to the various landmarks, and the blue lines indicate the observations from the best predicted particle in the filter. 
+Yes, the localization is visualized in the simulator as a blue circle.  If you view the [recording of my final result](./project_recording.mp4), you can see the filter localizes the vehicle well throughout the run.  A description of the filter implementation itself can be found below. 
 
 ## Running the Code
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
